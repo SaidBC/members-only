@@ -10,7 +10,7 @@ INSERT INTO posts (created_at,author_name,content, author_id) VALUES (1727713696
 
 const start = async () => {
     const client = new Client({
-        connectionString: 'postgresql://escanor:roger123@localhost:5432/members_only'
+        connectionString: process.env.DATABASE_URL
     });
 
     await client.connect();
