@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include('./partials/header.ejs') %>
+  <main>
+    <form action="/signup" method="POST">
+      <h2>Signup into MEMBER-ONLY APP</h2>
+      <div class="form-container">
+        <label for="fName">First name :</label>
+        <input name="firstname" type="text" id="fName">
+        <%- include('./partials/inputsError.ejs',{inputType:'firstname',errors}) %>
+        <label for="lName">Last name :</label>
+        <input name="lastname" type="text" id="lName">
+        <%- include('./partials/inputsError.ejs',{inputType:'lastname',errors}) %>
+        <label for="username">Username :</label>
+        <input name="username" type="text" id="username">
+        <%- include('./partials/inputsError.ejs',{inputType:'username',errors}) %>
+        <label for="email">Email :</label>
+        <input name="email" type="email" id="email">
+        <%- include('./partials/inputsError.ejs',{inputType:'email',errors}) %>
+        <label for="password">Password :</label>
+        <input name="password" type="password" id="password">
+        <%- include('./partials/inputsError.ejs',{inputType:'password',errors}) %>
+        <label for="confirm-password">Confirm Password :</label>
+        <input name="confirmPassword" type="password" id="confirm-password">
+        <%- include('./partials/inputsError.ejs',{inputType:'confirmPassword',errors}) %>
+        <button type="submit">Signup</button>
+      </div>
+      <p>Already have an account ? <a href="/login">Login</a></p>
+    </form>
+  </main>
+  <%- include('./partials/footer.ejs') %>
+</body>
+
+</html>

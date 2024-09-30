@@ -1,0 +1,3 @@
+<% if (errors.filter(err => err.path == inputType)?.at(0)) { %>
+<div class="inputs-error"><%= errors.find(err => err.path == inputType).msg %></div>
+<% } %>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include('./partials/header.ejs') %>
+  <main>
+    <form action="/new" method="POST">
+      <h2>CREATE A NEW POST : </h2>
+      <div class="form-container">
+        <label for="content">Content :</label>
+        <textarea name="content" type="text" id="content"></textarea>
+        <%- include('./partials/inputsError.ejs',{inputType:'content',errors}) %>
+        <button type="submit">SEND</button>
+      </div>
+    </form>
+  </main>
+  <%- include('./partials/footer.ejs') %>
+</body>
+
+</html>
