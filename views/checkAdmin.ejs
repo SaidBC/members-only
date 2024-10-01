@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include('./partials/header.ejs') %>
+  <main>
+    <form action="/admin-checker" method="POST">
+      <h2>Enter Admin Password : </h2>
+      <div class="form-container">
+        <label for="password">Password :</label>
+        <input name="password" type="password" id="password">
+        <%- include('./partials/inputsError.ejs',{inputType:'content',errors}) %>
+        <button type="submit">SEND</button>
+      </div>
+    </form>
+  </main>
+  <%- include('./partials/footer.ejs') %>
+</body>
+
+</html>

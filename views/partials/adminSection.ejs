@@ -1,0 +1,7 @@
+<% if (locals.currentUser?.role == "admin") { %>
+<div class="admin-section">
+  <form action="./posts/<%=  post.post_id%>/delete" method="POST">
+    <button>DELETE</button>
+  </form>
+</div>
+<% } %>

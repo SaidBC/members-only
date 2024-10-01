@@ -1,8 +1,9 @@
 const asyncHandler = require('express-async-handler');
 const LocalStrategy = require('passport-local').Strategy
 const { body, validationResult } = require('express-validator')
-const { getUserById, getUserByUserName, createUser, getAllPosts, createPost } = require('../db/queries')
+const { getUserById, getUserByUserName, createUser, getAllPosts, createPost, upgradeUser, deletePostById } = require('../db/queries')
 const bcrypt = require('bcrypt');
+const { render } = require('ejs');
 
 const validator = [
     body('firstname').trim().custom(val => val.split(' ').length == 1 && val != '').withMessage('please fill your first name'),
@@ -104,6 +105,37 @@ const postNewPostPage = async (req, res) => {
         console.log(error)
     }
 }
+
+const getMembershipGet = (req, res) => {
+    res.render('getMembership')
+}
+const getMembershipPost = async (req, res) => {
+    if (req.user.role != 'user') return res.redirect('/')
+    const userId = req.user.id;
+    await upgradeUser(userId, 'member');
+    res.redirect('/')
+}
+const getAdminChecker = (req, res) => {
+    res.render('checkAdmin', { errors: [] })
+}
+
+const postAdminChecker = async (req, res) => {
+    if (req.user.role == 'admin') return res.redirect('/')
+    const userId = req.user.id;
+    await upgradeUser(userId, 'admin');
+    res.redirect('/');
+}
+
+const deletePost = async (req, res) => {
+    if (req.user.role !== 'admin') return res.redirect('/');
+    await deletePostById(req.params.postId);
+    res.redirect('/')
+}
+
 module.exports = {
-    getHomePage, getLoginPage, getSignupPage, postSignupPage, logoutUser, validator, mainPassport, getNewPostPage, postNewPostPage
+    getHomePage, getLoginPage, getSignupPage,
+    postSignupPage, logoutUser, validator,
+    mainPassport, getNewPostPage, postNewPostPage,
+    getMembershipGet, getAdminChecker, getMembershipPost,
+    postAdminChecker, deletePost
 }

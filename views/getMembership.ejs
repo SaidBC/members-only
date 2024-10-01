@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <%- include('./partials/header.ejs') %>
+  <main>
+    <div class="clicker-container">
+      <div class="heading">
+        <% if (locals.currentUser.role == "admin"  || locals.currentUser.role == "member") { %>
+        <h2>YOU ARE ALREADY A <%= locals.currentUser.role.toUpperCase() %></h2>
+        <% }else{ %>
+        <h2>CLICK 100 TIMES TO BE A MEMBER</h2>
+        <% } %>
+      </div>
+      <div class="clicker">
+        <div class="times">0</div>
+      </div>
+    </div>
+    <div class="admin-question">
+      <span>ARE YOU THE ADMIN ?<a href="/admin-checker"> CLICK HERE</a></span>
+    </div>
+  </main>
+  <%- include('./partials/footer.ejs') %>
+  <script src="./clicker.js"></script>
+</body>
+
+</html>

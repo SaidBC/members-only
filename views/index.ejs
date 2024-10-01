@@ -30,13 +30,14 @@
             <img width="50" src="./assets/anonymous-user-icon.png" alt="">
           </div>
           <div>
-            <h2 class="post-author"><%= locals.currentUser?post.author_name:'Anonymous' %></h1>
+            <h2 class="post-author"><%= locals.currentUser?.role == "admin"  || locals.currentUser?.role == "member"?post.author_name:'Anonymous' %></h1>
               <span class="creating-time"><%=timeAgo(post.created_at)%> ago</span>
           </div>
         </div>
         <div class="post-content">
           <p><%= post.content %></p>
         </div>
+        <%- include('./partials/adminSection.ejs',{post}) %>
       </div>
       <% }) %>
     </div>
